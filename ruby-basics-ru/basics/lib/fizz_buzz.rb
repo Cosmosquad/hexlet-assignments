@@ -15,11 +15,11 @@ def fizz_buzz(num1, num2)
     elsif idx % 3 == 0
       result << 'Fizz '
     else
-      result << idx.to_str + ' '
+      result << idx.to_s + ' '
     end
     idx += 1
   end
-  result      
+  puts result      
 end
 
 # END
