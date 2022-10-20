@@ -16,6 +16,6 @@ def fizz_buzz(num1, num2)
     end
     idx += 1
   end
-  result.chop!
+  puts result.chop!
 end
 # END
