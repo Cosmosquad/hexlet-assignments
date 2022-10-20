@@ -3,6 +3,9 @@
 # BEGIN
 def fizz_buzz(num1, num2)
   result = ''
+  if num1 > num2 
+    result = nil
+  end
   idx = num1
   while idx <= num2
     if idx % 3 == 0 && idx % 5 == 0
@@ -11,13 +14,12 @@ def fizz_buzz(num1, num2)
       result << 'Buzz '
     elsif idx % 3 == 0
       result << 'Fizz '
-    elsif num1 > num2 
-      result = nil
-    else 
+    else
       result << idx.to_s + ' '
     end
     idx += 1
   end
-  result
+  result      
 end
+
 # END
