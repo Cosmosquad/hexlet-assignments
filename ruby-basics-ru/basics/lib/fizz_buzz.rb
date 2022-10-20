@@ -15,7 +15,7 @@ def fizz_buzz(num1, num2)
     elsif idx % 3 == 0
       result << 'Fizz '
     else
-      result << idx.to_s{ |idx| idx.dup.force_encoding("UTF-8") } + ' '
+      result << idx.to_s.dup.force_encoding("UTF-8") + ' '
     end
     idx += 1
   end
