@@ -11,6 +11,8 @@ def fizz_buzz(num1, num2)
       result << 'Buzz '
     elsif idx % 3 == 0
       result << 'Fizz '
+    elsif num1 > num2 
+      result = nil
     else 
       result << idx.to_s + ' '
     end
