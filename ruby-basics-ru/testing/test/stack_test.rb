@@ -5,51 +5,27 @@ require_relative '../lib/stack'
 
 class StackTest < Minitest::Test
   # BEGIN
-  def before_setup
-    @stack = Stack.new(%w[1 2 3 4 5 6])
-    @stack_default = Stack.new
-  end
+  def test_stack
+    stack = Stack.new
+    assert { stack.to_a == [] }
+    assert { stack.empty? }
+    assert { stack.size.zero? }
 
-  def test_init_with_default_params
-    assert(@stack_default.empty?)
-    assert(@stack_default.to_a == [])
-  end
+    stack.push! 'ruby'
+    stack.push! 'php'
+    stack.push! 'java'
+    assert { stack.to_a == %w[ruby php java] }
+    assert { stack.size == 3 }
+    refute { stack.empty? }
 
-  def test_init_with_params
-    expected = %w[1 2 3 4 5 6]
-    assert(@stack.empty? == false)
-    assert(@stack.to_a == expected)
-  end
+    stack.pop!
+    assert { stack.to_a == %w[ruby php]}
+    assert { stack.size == 2 }
 
-  def test_push!
-    expected = %w[1 2 3]
-    @stack_default.push!('1')
-    @stack_default.push!('2')
-    @stack_default.push!('3')
-    assert(@stack_default.to_a == expected)
-  end
-
-  def test_pop!
-    @stack_default.push!(1)
-    @stack_default.pop!
-    assert_empty(@stack_default)
-
-    @stack.pop!
-    @stack.pop!
-    expected = %w[1 2 3 4]
-    assert(@stack.to_a == expected)
-  end
-
-  def test_size
-    assert(@stack.size == 6)
-    assert(@stack_default.size.zero?)
-  end
-
-  def test_clear!
-    @stack.clear!
-    @stack_default.clear!
-    assert(@stack.to_a == [])
-    assert(@stack_default.to_a == [])
+    stack.clear!
+    assert { stack.to_a == [] }
+    assert { stack.empty? }
+    assert { stack.size.zero? }
   end
   # END
 end
