@@ -5,27 +5,37 @@ require_relative '../lib/stack'
 
 class StackTest < Minitest::Test
   # BEGIN
-  def test_stack
-    stack = Stack.new
-    assert { stack.to_a == [] }
-    assert { stack.empty? }
-    assert { stack.size.zero? }
 
-    stack.push! 'ruby'
-    stack.push! 'php'
-    stack.push! 'java'
-    assert { stack.to_a == %w[ruby php java] }
-    assert { stack.size == 3 }
-    refute { stack.empty? }
+  def setup
+    @stack = Stack.new([1, 2, 3])
+  end
 
-    stack.pop!
-    assert { stack.to_a == %w[ruby php]}
-    assert { stack.size == 2 }
+  def test_size
+    assert { @stack.size == 3 }
+  end
 
-    stack.clear!
-    assert { stack.to_a == [] }
-    assert { stack.empty? }
-    assert { stack.size.zero? }
+  def test_pop
+    @stack.pop!
+    assert { @stack.size == 2 }
+  end
+
+  def test_push
+    @stack.push!(4)
+    assert { @stack.size == 4 }
+  end
+
+  def test_to_a
+    assert { @stack.to_a.instance_of?(Array) }
+  end
+
+  def test_clear
+    @stack.clear!
+    assert { @stack.to_a.empty? }
+  end
+
+  def test_empty
+    @stack.clear!
+    assert { @stack.empty? }
   end
   # END
 end
