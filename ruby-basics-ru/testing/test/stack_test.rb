@@ -5,64 +5,51 @@ require_relative '../lib/stack'
 
 class StackTest < Minitest::Test
   # BEGIN
-    def test_pop!
-    stack = Stack.new
-    stack.push!(1)
-    stack.push!(2)
-    stack.push!(3)
-    empty_stack = Stack.new
-    assert { stack.pop! == 3 }
-    assert { empty_stack.pop! == nil }
+  def before_setup
+    @stack = Stack.new(%w[1 2 3 4 5 6])
+    @stack_default = Stack.new
+  end
+
+  def test_init_with_default_params
+    assert(@stack_default.empty?)
+    assert(@stack_default.to_a == [])
+  end
+
+  def test_init_with_params
+    expected = %w[1 2 3 4 5 6]
+    assert(@stack.empty? == false)
+    assert(@stack.to_a == expected)
   end
 
   def test_push!
-    stack = Stack.new
-    stack.push!(1)
-    stack.push!(2)
-    stack.push!(3)
-    empty_stack = Stack.new
-    assert { stack.push!(4) == [1, 2, 3, 4] }
-    assert { empty_stack.push!(4) == [4] }
+    expected = %w[1 2 3]
+    @stack_default.push!('1')
+    @stack_default.push!('2')
+    @stack_default.push!('3')
+    assert(@stack_default.to_a == expected)
   end
 
-  def test_empty?
-    stack = Stack.new
-    stack.push!(1)
-    stack.push!(2)
-    stack.push!(3)
-    empty_stack = Stack.new
-    assert { !stack.empty? }
-    assert { empty_stack.empty? }
-  end
+  def test_pop!
+    @stack_default.push!(1)
+    @stack_default.pop!
+    assert_empty(@stack_default)
 
-  def test_to_a
-    stack = Stack.new
-    stack.push!(1)
-    stack.push!(2)
-    stack.push!(3)
-    empty_stack = Stack.new
-    assert { stack.to_a.is_a?(Array) }
-    assert { empty_stack.to_a.is_a?(Array) }
-  end
-
-  def test_clear!
-    stack = Stack.new
-    stack.push!(1)
-    stack.push!(2)
-    stack.push!(3)
-    empty_stack = Stack.new
-    assert { stack.clear! == [] }
-    assert { empty_stack.clear! == [] }
+    @stack.pop!
+    @stack.pop!
+    expected = %w[1 2 3 4]
+    assert(@stack.to_a == expected)
   end
 
   def test_size
-    stack = Stack.new
-    stack.push!(1)
-    stack.push!(2)
-    stack.push!(3)
-    empty_stack = Stack.new
-    assert { stack.size == 3 }
-    assert { empty_stack.size == 0 }
+    assert(@stack.size == 6)
+    assert(@stack_default.size.zero?)
+  end
+
+  def test_clear!
+    @stack.clear!
+    @stack_default.clear!
+    assert(@stack.to_a == [])
+    assert(@stack_default.to_a == [])
   end
   # END
 end
