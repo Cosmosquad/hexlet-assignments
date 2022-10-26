@@ -35,4 +35,5 @@ class Url
     uri == other.uri
   end
 end
+end
 # END
