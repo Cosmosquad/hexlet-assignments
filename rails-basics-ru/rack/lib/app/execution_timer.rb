@@ -7,11 +7,11 @@ class ExecutionTimer
 
   def call(env)
     # BEGIN
-    start = Time.now
-    status, headers, body = @app.call(env)
-    stop = Time.now
-    puts "Response Time: #{(stop.usec - start.usec).to_f / 1000}"
-    [status, headers, body]
+    from = Time.new
+    status, header, body = @app.call env
+    message = "Execute time is : #{Time.new - from}"
+
+    [status, header, (body << message).join(' ')]
     # END
   end
 end
