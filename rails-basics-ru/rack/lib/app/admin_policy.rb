@@ -7,13 +7,7 @@ class AdminPolicy
 
   def call(env)
     # BEGIN
-    status, headers, body = @app.call(env)
-    request = Rack::Request.new(env)
-    if request.path.match?(%r{\A/admin})
-      [403, {}, []]
-    else
-      [status, headers, body]
-    end
+    
     # END
   end
 end
