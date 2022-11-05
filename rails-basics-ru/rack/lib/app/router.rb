@@ -5,23 +5,12 @@ require 'rack'
 class Router
   def call(env)
     # BEGIN
-    request = Rack::Request.new(env)
-    if request.path == '/'
-      case request.request_method
-      when 'GET'
-        [status, headers, body]
-      when 'POST'
-        [201, headers.merge({'x-created' => 'True'}), ['Item was successfully created']]
-      end
-    elsif request.path == '/about'
-      case request.request_method
-      when 'GET'
-        [status, headers, body]
-      when 'POST'
-        [201, headers.merge({'x-created' => 'True'}), ['Item was successfully created']]
-      end
+    request = Rack::Request.new env
+    case request.path
+    when '/' then [200, { 'Content-Type' => 'text/plain' }, ['Hello, World!']]
+    when '/about' then [200, { 'Content-Type' => 'text/plain' }, ['About page']]
     else
-      [404, {}, ["Not Found"]]
+      [404, { 'Content-Type' => 'text/plain' }, ['404 Not Found']]
     end
     # END
   end
