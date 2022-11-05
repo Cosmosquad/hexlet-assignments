@@ -5,7 +5,7 @@ require 'rack'
 class Router
   def call(env)
     # BEGIN
-    request = Rack::Request.env(env)
+    request = Rack::Request.new(env)
     if request.path == '/'
       case request.request_method
       when 'GET'
